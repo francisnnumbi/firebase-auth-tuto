@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1092788491025",
+    "project_id": "fir-auth-e0f75",
+    "storage_bucket": "fir-auth-e0f75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092788491025:android:6e71aef52fc7d8fa7872b0",
+        "android_client_info": {
+          "package_name": "com.smirltech.firebase_auth_tuto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPFByW63_ED7pcGUUHurJ13pLa1b1c3I8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
