@@ -18,9 +18,7 @@ Future<void> main() async {
 }
 
 Future<void> initServices() async {
-  await TodoService.init().then((value) {
-    if (Auth().currentUser != null) TodoService.to.initializeBindings();
-  });
+  await TodoService.init();
 }
 
 class MyApp extends StatelessWidget {

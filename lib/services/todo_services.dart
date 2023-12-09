@@ -1,4 +1,5 @@
 import 'package:firebase_auth_tuto/api/firebase_api.dart';
+import 'package:firebase_auth_tuto/auth.dart';
 import 'package:firebase_auth_tuto/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,13 +46,20 @@ class TodoService extends GetxService {
 
   Future<void> dispose() async {
     await clearBindings();
-    await Get.delete(force: true);
+    await Get.delete<TodoService>(force: true);
   }
 
   @override
   void onReady() {
     // TODO: implement onReady
     super.onReady();
+    Auth().authStateChanges.listen((event) {
+      if (event == null) {
+        dispose();
+      } else {
+        initializeBindings();
+      }
+    });
   }
 
   void addTodo({
