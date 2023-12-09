@@ -1,7 +1,10 @@
+import 'package:firebase_auth_tuto/services/todo_services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth_tuto/widget_tree.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'auth.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -10,7 +13,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await initServices();
   runApp(const MyApp());
+}
+
+Future<void> initServices() async {
+  await TodoService.init().then((value) {
+    if (Auth().currentUser != null) TodoService.to.initializeBindings();
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +33,7 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.transparent,
       ),
     );
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false, // Remove the debug banner
 

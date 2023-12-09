@@ -15,9 +15,15 @@ dependencies:
   cupertino_icons: ^1.0.6
   faker: ^2.1.0
 
+  get: ^4.6.6
+
   firebase_core: ^2.24.0
   firebase_auth: ^4.15.0
-  firebase_storage: ^11.5.3
+  #firebase_storage: ^11.5.3
+  cloud_firestore: ^4.13.3
+
+  #slidable
+  flutter_slidable: ^3.0.1
 
 dev_dependencies:
   flutter_test:
