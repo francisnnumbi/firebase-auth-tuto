@@ -8,13 +8,16 @@ import '../models/todo.dart';
 
 class FirebaseApi {
   static Future<String> createTodo({
-    required String content,
+    required String title,
+    String? content,
   }) async {
-    final docTodo = Auth().db.doc();
+    final docTodo = Auth().dbCollection.doc();
 
     final todo = Todo(
       id: docTodo.id,
-      todoText: content,
+      date: DateTime.now(),
+      title: title,
+      content: content,
       isDone: false,
     );
 
@@ -24,19 +27,19 @@ class FirebaseApi {
   }
 
   static Future updateTodo(Todo todo) async {
-    final docTodo = Auth().db.doc(todo.id);
+    final docTodo = Auth().dbCollection.doc(todo.id);
     await docTodo.update(todo.toJson());
   }
 
   static Future deleteTodo(Todo todo) async {
-    final docTodo = Auth().db.doc(todo.id);
+    final docTodo = Auth().dbCollection.doc(todo.id);
 
     await docTodo.delete();
   }
 
   static Stream<List<Todo>> readTodos() => Auth()
-      .db
-      .orderBy('todoText', descending: false)
+      .dbCollection
+      .orderBy('title', descending: false)
       .snapshots()
       .transform(Utils.transformer(Todo.fromJson));
 }

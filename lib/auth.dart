@@ -15,8 +15,14 @@ class Auth {
 
   String get uid => _firebaseAuth.currentUser!.uid;
 
-  CollectionReference<Map<String, dynamic>> get db =>
+  CollectionReference<Map<String, dynamic>> get dbCollection =>
       FirebaseFirestore.instance.collection(Auth().uid);
+
+  CollectionReference<Map<String, dynamic>> get dbRef =>
+      FirebaseFirestore.instance
+          .collection(Auth().uid)
+          .doc('hyA6lLthPuQtm7Amjkqi')
+          .collection('todos');
 
   Future<void> signInWithEmailAndPassword({
     required String email,

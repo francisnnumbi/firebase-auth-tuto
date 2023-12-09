@@ -8,7 +8,8 @@ import '../constants/colors.dart';
 class AddTodo extends StatelessWidget {
   AddTodo({super.key});
 
-  final TextEditingController textController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController contentController = TextEditingController();
 
   Widget _entryField({
     required String title,
@@ -47,10 +48,15 @@ class AddTodo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        _entryField(
+          title: "enter title",
+          controller: titleController,
+        ),
+        const SizedBox(width: 10),
         Expanded(
           child: _entryField(
-            title: "enter todo",
-            controller: textController,
+            title: "enter content",
+            controller: contentController,
           ),
         ),
         Container(
@@ -61,12 +67,14 @@ class AddTodo extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               log("add todo button pressed");
-              if (textController.text.isNotEmpty) {
+              if (titleController.text.isNotEmpty) {
                 TodoService.to.addTodo(
-                  content: textController.text,
+                  title: titleController.text,
+                  content: contentController.text,
                 );
                 // clear text field
-                textController.clear();
+                titleController.clear();
+                contentController.clear();
               }
             },
             style: ElevatedButton.styleFrom(

@@ -48,8 +48,9 @@ class TodoItem extends StatelessWidget {
                 if (kDebugMode) {
                   print("tile edit tapped");
                 }
-                openTodoDialog(
-                    context: context, id: todo.id, content: todo.todoText);
+                TodoService.to.openTodo(
+                  todo: todo,
+                );
               },
               backgroundColor: tdBlue,
               icon: Icons.edit,
@@ -83,7 +84,7 @@ class TodoItem extends StatelessWidget {
           //Checkbox(value: todo.isDone, onChanged: (value) {}),
           tileColor: tdWhite,
           title: Text(
-            todo.todoText,
+            todo.title,
             //  maxLines: 2,
             // softWrap: true,
             overflow: TextOverflow.ellipsis,

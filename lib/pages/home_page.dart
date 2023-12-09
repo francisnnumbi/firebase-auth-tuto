@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: tdBlue,
         foregroundColor: tdWhite,
         onPressed: () {
-          openTodoDialog(context: context, id: '', content: '');
+          TodoService.to.openTodo();
         },
         child: const Icon(Icons.add),
       ),

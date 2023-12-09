@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/todo.dart';
+import '../pages/todo_page.dart';
 
 class TodoService extends GetxService {
   // ------- static methods ------- //
@@ -23,11 +24,15 @@ class TodoService extends GetxService {
         ? todos
         : todos
             .where(
-              (Todo todo) => todo.todoText.toLowerCase().contains(
+              (Todo todo) => todo.title.toLowerCase().contains(
                     searchQuery.value.toLowerCase(),
                   ),
             )
             .toList();
+  }
+
+  openTodo({Todo? todo}) {
+    Get.to(() => TodoPage(todo: todo));
   }
 
   Future<void> initializeBindings() async {
@@ -50,9 +55,12 @@ class TodoService extends GetxService {
   }
 
   void addTodo({
-    required String content,
+    required String title,
+    String? content,
   }) {
-    FirebaseApi.createTodo(content: content);
+    FirebaseApi.createTodo(title: title, content: content).then((value) {
+      Get.back();
+    });
   }
 
   void filterTodos(String query) {
@@ -67,11 +75,15 @@ class TodoService extends GetxService {
 
   void updateTodo({
     required String id,
-    required String content,
+    required String title,
+    String? content,
   }) {
     final Todo todo = todos.firstWhere((Todo todo) => todo.id == id);
-    todo.todoText = content;
-    FirebaseApi.updateTodo(todo);
+    todo.title = title;
+    todo.content = content;
+    FirebaseApi.updateTodo(todo).then((value) {
+      Get.back();
+    });
   }
 
   void toggleTodoStatus(String id) {
